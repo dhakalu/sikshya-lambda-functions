@@ -1,5 +1,5 @@
 
-const { getUser, createNewUser, addUserToGroup } = require('../service/UserService')
+const { getUser, createNewUser, addUserToGroup, loginUser, forgetPassword } = require('../service/UserService')
 
 const resolvers = {
   Query: {
@@ -7,7 +7,9 @@ const resolvers = {
   },
   Mutation: {
     createNewUser: (root, args) => createNewUser(args.user),
-    assignUserToGroup: (root, args) => addUserToGroup(args.request)
+    assignUserToGroup: (root, args) => addUserToGroup(args.request),
+    login: (root, args) => loginUser(args.request),
+    forgetPassword: (root, args) => forgetPassword(args.request)
   }
 }
 

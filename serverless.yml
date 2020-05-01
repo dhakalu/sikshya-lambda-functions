@@ -62,6 +62,8 @@ functions:
          cors: true
     environment:
       USER_POOL_ID: ${ssm:/sikshya/cognito/dev/pool_id}
+      CLIENT_ID: ${ssm:/sikshya/cognito/dev/client_ids/ciam~true}
+      AUTH_FLOW: 'ADMIN_USER_PASSWORD_AUTH'
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)

@@ -1,7 +1,7 @@
 
 const AWS = require('aws-sdk')
 
-const { convertUserRequestToCongintoRequest, getCognitoUserResponseToSchemaUser } = require('../utils/UserUtils')
+const { convertUserRequestToCongintoRequest, getCognitoUserResponseToSchemaUser, convertAuthenticationResultToLoginResponse } = require('../utils/UserUtils')
 
 const userPoolId = process.env.USER_POOL_ID
 const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({ apiVersion: '2016-04-18' })
@@ -52,4 +52,37 @@ const addUserToGroup = ({ username, groupName }) => {
   })
 }
 
-module.exports = { createNewUser, getUser, addUserToGroup }
+const loginUser = ({ username, password }) => {
+  const params = {
+    AuthFlow: process.env.AUTH_FLOW,
+    ClientId: process.env.CLIENT_ID,
+    UserPoolId: process.env.USER_POOL_ID,
+    AuthParameters: {
+      USERNAME: username,
+      PASSWORD: password
+    }
+  }
+
+  console.log(params)
+
+  return new Promise((resolve, reject) => {
+    cognitoidentityserviceprovider.adminInitiateAuth(params).promise().then(data => {
+      resolve(convertAuthenticationResultToLoginResponse(data.AuthenticationResult))
+    }).catch(reject)
+  })
+}
+
+const forgetPassword = ({ username }) => {
+  const params = {
+    Username: username,
+    ClientId: process.env.CLIENT_ID
+  }
+
+  return new Promise((resolve, reject) => {
+    cognitoidentityserviceprovider.forgotPassword(params).promise()
+      .then(data => resolve('Password reset link set to your email. Please check your email.'))
+      .catch(reject)
+  })
+}
+
+module.exports = { createNewUser, getUser, addUserToGroup, loginUser, forgetPassword }

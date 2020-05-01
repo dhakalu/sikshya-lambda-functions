@@ -25,9 +25,24 @@ const typeDefs = gql`
         groupName: String!
     }
 
+    input UserLoginRequest {
+        username: String!
+        password: String!
+    }
+
+    type UserLoginResponse {
+        accessToken: String!
+        expiresIn: String!
+        tokenType: String!
+    }
+
     type UserGroupAssignResponse {
         username: String!
         groupName: String!
+    }
+
+    input ForgetPasswordRequest {
+        username: String!
     }
 
     type Query {
@@ -37,6 +52,8 @@ const typeDefs = gql`
     type Mutation {
         createNewUser(user: UserSignUpRequest): User!
         assignUserToGroup(request: UserGroupAssignRequest): UserGroupAssignResponse!
+        login(request: UserLoginRequest): UserLoginResponse!
+        forgetPassword: String!
     }
 `
 

@@ -82,4 +82,13 @@ const getCognitoUserResponseToSchemaUser = (cogintoUserResponse, attributesKey =
   return user
 }
 
-module.exports = { convertUserRequestToCongintoRequest, getCognitoUserResponseToSchemaUser }
+const convertAuthenticationResultToLoginResponse = (authenticationResult) => {
+  const { AccessToken, ExpiresIn, TokenType } = authenticationResult
+  return {
+    accessToken: AccessToken,
+    expiresIn: ExpiresIn,
+    tokenType: TokenType
+  }
+}
+
+module.exports = { convertUserRequestToCongintoRequest, getCognitoUserResponseToSchemaUser, convertAuthenticationResultToLoginResponse }
