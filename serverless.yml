@@ -4,10 +4,6 @@ service: skishya-ciam-service
 app: skishya-ciam-service
 org: dhakalupenn
 
-# You can pin your service to only deploy with a specific Serverless version
-# Check out our docs for more details
-# frameworkVersion: "=X.X.X"
-
 provider:
   name: aws
   profile: testProfile
@@ -48,9 +44,6 @@ provider:
 functions:
   graphql:
     handler: js/handler/userGraphQL.graphqlHandler
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
     events:
      - http:
          path: graphql
@@ -97,13 +90,30 @@ functions:
    
 
 # you can add CloudFormation resource templates here
-# resources:
-#  Resources:
-#    S3Bucket:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: ${self:service}
-#  Outputs:
-#     S3BucketArn:
-#       Description: "S3 Bucket Name"
-#       Value: '!GettAtt S3Bucket.Arn'
+resources:
+  Resources:
+    SikshyaTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions: 
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+        BillingMode: PROVISIONED
+        KeySchema: 
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: SikshyaSchoolData-${self:provider.stage}
+        Tags: 
+          - Key: Env
+            Value: ${self:provider.stage}
+    S3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:service}

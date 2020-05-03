@@ -11,6 +11,45 @@ const LAST_NAME = 'family_name'
 const MIDDLE_NAME = 'middle_name'
 const NAME = 'name'
 
+const validateCreateNewUserRequest = ({
+  username,
+  email,
+  firstName,
+  lastName,
+  middleName
+}) => {
+  let errors = {}
+  if (!username) {
+    errors = {
+      ...errors,
+      username: 'Username is required'
+    }
+  }
+
+  if (!email) {
+    errors = {
+      ...errors,
+      email: 'Email is required'
+    }
+  }
+
+  if (!firstName) {
+    errors = {
+      ...errors,
+      firstName: 'First name is required'
+    }
+  }
+
+  if (!lastName) {
+    errors = {
+      ...errors,
+      lastName: 'Last name is required'
+    }
+  }
+
+  return errors
+}
+
 /**
  * Converts the regular user JSON sent from/to UI to cognito request params.
  * @param {*} param
@@ -83,12 +122,17 @@ const getCognitoUserResponseToSchemaUser = (cogintoUserResponse, attributesKey =
 }
 
 const convertAuthenticationResultToLoginResponse = (authenticationResult) => {
-  const { AccessToken, ExpiresIn, TokenType } = authenticationResult
   return {
-    accessToken: AccessToken,
-    expiresIn: ExpiresIn,
-    tokenType: TokenType
+    accessToken: authenticationResult.AccessToken || 'No Token Found',
+    expiresIn: authenticationResult.ExpiresIn || new Date(),
+    tokenType: authenticationResult.TokenType || 'none',
+    idToken: authenticationResult.IdToken || 'Cannot find id token for this person'
   }
 }
 
-module.exports = { convertUserRequestToCongintoRequest, getCognitoUserResponseToSchemaUser, convertAuthenticationResultToLoginResponse }
+module.exports = {
+  validateCreateNewUserRequest,
+  convertUserRequestToCongintoRequest,
+  getCognitoUserResponseToSchemaUser,
+  convertAuthenticationResultToLoginResponse
+}
