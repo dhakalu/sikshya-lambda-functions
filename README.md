@@ -25,8 +25,22 @@ In above case, the user should be allowed to perform the administrative actions 
 ## School Query Patterns
 
 * I wat to see all the schools listed
-    * Filterable by Type/Address/State
-    * `TODO` Filterable By name
-    * `TODO` Sorted b
+* `TODO` Find All schools around where I live
+* Find All the schools in certain area that are of a particulart type
+* `TODO` Find All the school that match certain name pattern
+* `TODO` Find All students enrolled in a chool 
+
+## Class Query Patterns
+
+* CRUD
+* Get All the classes of a school 
+* Get ALl the classes of a class type/level
+* Find all students who are enrolled in a particular class 
+
+## Assignments Query Patterns
+
+* Show all the assignments of a class
+* Show all the assignements due for a student
+* Show all the assignements posted by a teacher
 
 ## Student Features

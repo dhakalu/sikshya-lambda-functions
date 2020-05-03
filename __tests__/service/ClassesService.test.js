@@ -30,13 +30,11 @@ describe('Test different actions that can be perfornmed in a class', () => {
     jest.setTimeout(3000)
     const data = await getAllClassesOfASchool({ schoolId: classRequest.schoolId })
     expect(data.Count).toBeGreaterThan(0)
-    expect(data.Count).toBe(3)
   })
 
   test('Query all the classes for given class level and school id', async () => {
     jest.setTimeout(30000)
     const data = await getAllClassesOfASchoolForAClassType({ schoolId: classRequest.schoolId, classType: classRequest.classType })
     expect(data.Count).toBeGreaterThan(0)
-    expect(data.Count).toBe(1)
   })
 })

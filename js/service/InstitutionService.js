@@ -20,6 +20,7 @@ const getInstutionsByDistrict = async (district) => {
    * TO achieve this we will have to create a GSI based on district.
    * We will explore this later.
    */
+  return 'todo'
 }
 
 const deleteInstitution = async (deleteInstitutionRequest) => {

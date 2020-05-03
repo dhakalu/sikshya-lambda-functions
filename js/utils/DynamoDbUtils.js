@@ -51,6 +51,13 @@ const deleteItem = async ({ key, conditional, operator }) => {
   return dynamodb.deleteItem(params).promise()
 }
 
+/**
+ * This method wraps around the dybamo query method.
+ * @param {*}
+ * @argument {String} condition The KeyConditionExpression that defines different filter operations to apply based on PK and SK
+ * @argument {Object} attributes Map of placeholders to values. Placeholders  used in condition will be substitued using this map.
+ * @argument {String} projection Comma seperated list of db attributes to fetch in the query
+ */
 const query = async ({ attributes, condition, projection }) => {
   const params = {
     KeyConditionExpression: condition,
