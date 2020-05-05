@@ -21,6 +21,9 @@ A user can belong to multiple groups at the same time. For example a teacher tea
 
 In above case, the user should be allowed to perform the administrative actions only in the institution whose administration he works at. He should be able to post `assignments/take attendence/and other teachrs` actions only to the courses he teaches. And he should be able to do all the students actions on the courses he studies.
 
+## Stack
+
+This application was originally written to host it in `AWS Lambda`. 
 
 ## School Query Patterns
 
@@ -33,14 +36,23 @@ In above case, the user should be allowed to perform the administrative actions 
 ## Class Query Patterns
 
 * CRUD
-* Get All the classes of a school 
+* Get All the classes of a school
 * Get ALl the classes of a class type/level
-* Find all students who are enrolled in a particular class 
+* Find all students who are enrolled in a particular class
+* Show attedence students enrolled in the class: Diplaying the list of students should be good enough for this
+
+SK: ATTNEDENCE_schoolId_ClassType_StudentId_[#jsalkfjasdf]
 
 ## Assignments Query Patterns
 
+* CRUD
 * Show all the assignments of a class
 * Show all the assignements due for a student
 * Show all the assignements posted by a teacher
 
 ## Student Features
+
+* `TODO` List all of my classes
+* `TODO` Show my schedule
+* `TDOD` Show all of my assignments
+* `TODO` Show all my graders
