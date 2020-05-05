@@ -23,7 +23,7 @@ In above case, the user should be allowed to perform the administrative actions 
 
 ## Stack
 
-This application was originally written to host it in `AWS Lambda`. 
+This application was originally written to host it in `AWS Lambda`. `AWS lambda` is fully managed serverless service. In data layer we are using `DynamoDB` to store our data. Other services used include: `AWS Parameter Store`, `AWS Cloudromation`, [`serverless`](https://www.serverless.com/examples/). Our application layer/ or lambda functions have been writtern in `NodeJS` using `Apollo-Lambda` library. The API are written in `GraphQL`
 
 ## School Query Patterns
 
